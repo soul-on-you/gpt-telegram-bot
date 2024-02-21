@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id                BigInt      @id @unique @default(autoincrement())
+  isInfluencer      Boolean  @default(false)
+  nickname          String?
+  balance           Int      @default(0)
+  requests          Int      @default(0)
+  likes             Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  totalReferalCount Int      @default(0)
+  referalId         BigInt?
+  earnedBalance     Int      @default(0)
+}
+
+model Payments {
+  id        String   @id @default(uuid())
+  balance   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
